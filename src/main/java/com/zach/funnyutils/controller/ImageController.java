@@ -2,6 +2,7 @@ package com.zach.funnyutils.controller;
 
 import net.coobird.thumbnailator.Thumbnails;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -11,11 +12,12 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 @RestController
+@RequestMapping("/api")
 public class ImageController {
 
     private static final String ASCII_CHARS = "@%#*+=-:. ";
 
-    @PostMapping("/api/image-to-ascii")
+    @PostMapping("/image-to-ascii")
     public String convertImageToAscii(@RequestParam("image") MultipartFile file) throws IOException {
         BufferedImage image = ImageIO.read(file.getInputStream());
         // 调整图片大小

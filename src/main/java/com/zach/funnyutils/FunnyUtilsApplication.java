@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration;
 import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
 
+// 暂时用不到数据库，先排除掉
 @SpringBootApplication(exclude = {
         DataSourceAutoConfiguration.class,
         DataSourceTransactionManagerAutoConfiguration.class,
@@ -21,8 +22,8 @@ public class FunnyUtilsApplication {
         SpringApplication.run(FunnyUtilsApplication.class, args);
         // 项目启动成功后打印日志
         log.info("=====================================");
-        log.info("✅ 趣多多工具箱后端项目启动成功 ✅");
-        log.info("服务地址: http://localhost:8080");
+        log.info("✅ funnyutils start successfully ✅");
+        log.info("server address: http://localhost:8080");
         log.info("=====================================");
     }
 }
