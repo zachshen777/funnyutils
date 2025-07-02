@@ -18,10 +18,14 @@ public class ImageController {
     private static final String ASCII_CHARS = "@%#*+=-:. ";
 
     @PostMapping("/image-to-ascii")
-    public String convertImageToAscii(@RequestParam("image") MultipartFile file) throws IOException {
+    public String convertImageToAscii(
+            @RequestParam("image") MultipartFile file,
+            @RequestParam(value = "width", defaultValue = "80") int width,
+            @RequestParam(value = "height", defaultValue = "40") int height
+    ) throws IOException {
         BufferedImage image = ImageIO.read(file.getInputStream());
         // 调整图片大小
-        BufferedImage resizedImage = Thumbnails.of(image).size(80, 40).asBufferedImage();
+        BufferedImage resizedImage = Thumbnails.of(image).size(width, height).asBufferedImage();
 
         StringBuilder asciiImage = new StringBuilder();
         for (int y = 0; y < resizedImage.getHeight(); y++) {
