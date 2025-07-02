@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" strict="true" name="FunnyUtilsConfig" encoding="UTF-8">
+    <!-- 定义属性 -->
+    <Properties>
+        <Property name="LOG_PATTERN">%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n</Property>
+        <Property name="LOG_FILE">${sys:user.home}/app/logs/funnyutils/funnyutils.log</Property>
+        <Property name="ERROR_FILE">${sys:user.home}/app/logs/funnyutils/funnyutils-error.log</Property>
+    </Properties>
+
+    <!-- 定义Appenders（输出目标） -->
+    <Appenders>
+        <!-- 控制台输出 -->
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${LOG_PATTERN}" />
+        </Console>
+
+        <!-- 滚动文件输出（按日期分割） -->
+        <RollingFile name="File" fileName="${LOG_FILE}"
+                     filePattern="${sys:user.home}/app/logs/funnyutils/funnyutils-%d{yyyy-MM-dd}.log.gz">
+            <PatternLayout>
+                <pattern>${LOG_PATTERN}</pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="100 MB" />
+            </Policies>
+            <DefaultRolloverStrategy max="30" />
+        </RollingFile>
+
+        <!-- 错误日志单独输出 -->
+        <RollingFile name="ErrorFile" fileName="${ERROR_FILE}"
+                     filePattern="${sys:user.home}/app/logs/funnyutils/funnyutils-error-%d{yyyy-MM-dd}.log.gz">
+            <PatternLayout pattern="${LOG_PATTERN}" />
+            <Filters>
+                <ThresholdFilter level="ERROR" onMatch="ACCEPT" onMismatch="DENY" />
+            </Filters>
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="100 MB" />
+            </Policies>
+            <DefaultRolloverStrategy max="30" />
+        </RollingFile>
+    </Appenders>
+
+    <!-- 定义Loggers（日志级别和Appender分配） -->
+    <Loggers>
+        <!-- 根Logger -->
+        <Root level="INFO">
+            <AppenderRef ref="Console" />
+            <AppenderRef ref="File" />
+            <AppenderRef ref="ErrorFile" />
+        </Root>
+
+        <!-- 应用特定Logger -->
+        <Logger name="com.zach.funnyutils" level="DEBUG" additivity="false">
+            <AppenderRef ref="Console" />
+            <AppenderRef ref="File" />
+        </Logger>
+
+        <!-- 第三方库日志级别调整 -->
+        <Logger name="org.springframework" level="INFO" additivity="false">
+            <AppenderRef ref="Console" />
+            <AppenderRef ref="File" />
+        </Logger>
+    </Loggers>
+</Configuration>

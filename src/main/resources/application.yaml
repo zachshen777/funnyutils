@@ -1,0 +1,10 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: funnyutils  # 应用名称
+#日志级别配置
+logging:
+  level:
+    root: INFO
+    com.zach.funnyutils: INFO
