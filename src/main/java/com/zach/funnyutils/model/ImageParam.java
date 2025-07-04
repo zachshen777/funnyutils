@@ -8,17 +8,17 @@ import lombok.Data;
 @Builder
 @Data
 public class ImageParam {
-    private int width;
-    private int height;
+    private String charType;
+    private String charInput;
     private double scale;
 
     @JsonCreator
-    public ImageParam(
-            @JsonProperty("width") int width,
-            @JsonProperty("height") int height,
+    public ImageParam (
+            @JsonProperty("charType") String charType,
+            @JsonProperty("charInput") String charInput,
             @JsonProperty("scale") double scale) {
-        this.width = width;
-        this.height = height;
+        this.charType = charType;
+        this.charInput = charInput;
         this.scale = scale;
     }
 }
