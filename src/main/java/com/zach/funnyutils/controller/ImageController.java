@@ -1,6 +1,5 @@
 package com.zach.funnyutils.controller;
 
-import com.alibaba.fastjson.JSON;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zach.funnyutils.model.ImageParam;
 import net.coobird.thumbnailator.Thumbnails;
@@ -42,7 +41,6 @@ public class ImageController {
                     .height(param.getHeight())
                     .asBufferedImage();
         }
-
 
         StringBuilder asciiImage = new StringBuilder();
         for (int y = 0; y < resizedImage.getHeight(); y++) {
