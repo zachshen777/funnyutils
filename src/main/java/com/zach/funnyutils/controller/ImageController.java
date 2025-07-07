@@ -1,6 +1,8 @@
 package com.zach.funnyutils.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.zach.funnyutils.annotation.RateLimit;
+import com.zach.funnyutils.enums.LimitType;
 import com.zach.funnyutils.model.ImageParam;
 import net.coobird.thumbnailator.Thumbnails;
 import org.slf4j.Logger;
@@ -24,6 +26,7 @@ public class ImageController {
     private static final Logger log = LoggerFactory.getLogger(ImageController.class);
 
     @PostMapping("/image-to-ascii")
+    @RateLimit(key = "image-to-ascii:", period = 60, count = 5, limitType = LimitType.IP)
     public String convertImageToAscii(
             @RequestParam("image") MultipartFile file,
             @RequestParam("imageParam") String paramJson

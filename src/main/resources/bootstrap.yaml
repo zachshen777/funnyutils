@@ -1,0 +1,16 @@
+# nacos 配置中心
+spring:
+  cloud:
+    nacos:
+      core:
+        auth:
+          enabled: false
+      config:
+        use-remote-configuration: true  # 明确使用远程配置优先
+        server-addr: 43.163.122.239:8848  # Nacos服务器地址
+        file-extension: yaml    # 配置文件格式
+        refresh-enabled: true
+        namespace: public  # 命名空间（可选，默认public）
+        group: DEFAULT_GROUP
+  application:
+    name: funnyutils        # 应用名称（与Nacos中Data ID的前缀匹配）
