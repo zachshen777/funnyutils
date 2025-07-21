@@ -19,4 +19,5 @@ public class GlobalExceptionHandler {
         response.put("retryAfter", ex.getRetryAfter());
         return new ResponseEntity<>(response, HttpStatus.TOO_MANY_REQUESTS);
     }
+
 }
